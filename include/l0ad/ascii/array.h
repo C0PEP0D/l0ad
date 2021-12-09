@@ -19,8 +19,13 @@ class ConverterArray : public Converter<TypeArray> {
         }
     public:
         void operator()(std::istream& file, TypeArray& loaded, char delimiter) const override {
-            for(auto& sub : loaded) {
+            std::size_t index;
+            while(not file.eof()) {
+                if(loaded.size() >= index) {
+                    loaded.emplace_back();
+                }
                 (*sConverter)(file, sub, delimiter);
+                index++;
             }
         }
     public:
