@@ -5,6 +5,7 @@
 // include std
 #include <fstream> // ifstream
 #include <string> // string
+#include <sstream> // istringstream
 // include modules
 
 namespace l0ad {
@@ -55,15 +56,13 @@ void loadCsvToMap(const std::string& fileName, TypeMap<std::string, TypeVector>&
 	std::string line;
 	std::getline(file, line);
 	line.erase(line.begin());
-	std::istringstream iHeaderStream;
-	iHeaderStream.str(line);
+	std::istringstream iHeaderStream(line);
 	while(std::getline(iHeaderStream, key, delimiter)) {
 		loaded[key] = TypeVector();
 	}
 	// Read data
     while(std::getline(file, line)) {
-        std::istringstream iLineStream;
-        iLineStream.str(line);
+        std::istringstream iLineStream(line);
         for(auto &pair: loaded) {
             pair.second.emplace_back();
             converter(iLineStream, pair.second.back(), delimiter);
