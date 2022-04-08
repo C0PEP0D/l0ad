@@ -43,6 +43,7 @@ void loadVector(const std::string& fileName, TypeVector& loaded, const char deli
 		converter(file, loaded[index], delimiter);
 		index++;
 	}
+	loaded.resize(index); // ensure loaded to be of the right size
 	// close file
 	file.close();
 }
