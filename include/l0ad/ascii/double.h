@@ -1,5 +1,5 @@
-#ifndef L0AD_DOUBLE_H
-#define L0AD_DOUBLE_H
+#ifndef L0AD_ASCII_DOUBLE_H
+#define L0AD_ASCII_DOUBLE_H
 #include <fstream>
 #pragma once
 
@@ -7,8 +7,7 @@
 #include <fstream> // ifstream, getline
 #include <string> // string, stod
 // include modules
-#include "l0ad/ascii/array.h"
-#include "l0ad/ascii/map.h"
+#include "l0ad/ascii/load.h"
 
 namespace l0ad {
 
@@ -24,18 +23,18 @@ class ConverterDouble : public Converter<double> {
 };
 
 
-void loadDouble(const std::string& fileName, double& loaded, char delimiter) {
-    load<double, ConverterDouble>(fileName, ConverterDouble(), loaded, delimiter);
+void loadDouble(const std::string& fileName, double* pLoaded, const size_t n, const char delimiter = '\n') {
+    load<double, ConverterDouble>(fileName, pLoaded, n, delimiter, ConverterDouble());
 }
 
-template<typename TypeArray>
-void loadArrayDouble(const std::string& fileName, TypeArray& loaded, char delimiter) {
-    loadArray<ConverterDouble, TypeArray, double>(fileName, loaded, delimiter);
+template<typename TypeVector>
+void loadVectorDouble(const std::string& fileName, TypeVector& loaded, char delimiter = '\n') {
+    loadVector<TypeVector, ConverterDouble>(fileName, loaded, delimiter, ConverterDouble());
 }
 
-template<template<typename, typename...> class TypeMap, typename TypeArray>
-void loadCsvToMapDouble(const std::string& fileName, TypeMap<std::string, TypeArray>& loaded, char delimiter) {
-    loadCsvToMap<ConverterDouble, TypeMap, TypeArray, double>(fileName, loaded, delimiter);
+template<template<typename, typename...> class TypeMap, typename TypeVector>
+void loadCsvToMapDouble(const std::string& fileName, TypeMap<std::string, TypeVector>& loaded, const char delimiter = ',') {
+    loadCsvToMap<TypeMap, TypeVector, ConverterDouble>(fileName, loaded, delimiter);
 }
 
 }
