@@ -23,7 +23,7 @@ class ConverterDouble : public Converter<double> {
 };
 
 
-void loadDouble(const std::string& fileName, double* pLoaded, const size_t n, const char delimiter = '\n') {
+inline void loadDouble(const std::string& fileName, double* pLoaded, const size_t n, const char delimiter = '\n') {
     load<double, ConverterDouble>(fileName, pLoaded, n, delimiter, ConverterDouble());
 }
 
