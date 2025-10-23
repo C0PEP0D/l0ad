@@ -6,8 +6,8 @@
 #include "l0ad/ascii/double.h"
 
 int main () {
-    std::vector<double> loaded(10);
-    l0ad::ascii::loadArrayDouble(std::string("../data/save.csv"), loaded, ',');
+    std::vector<double> loaded;
+    l0ad::ascii::loadVectorDouble(std::string("../data/save.txt"), loaded, ',');
     // output
     std::cout << "loaded values"<< std::endl;
     for (auto& l : loaded) {
